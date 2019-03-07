@@ -8,7 +8,7 @@ from flight_route.serializers import FlightRouteSerializer, JourneyInfoSerialize
 
 # Create your views here.
 class FlightRouteViewSet(viewsets.ModelViewSet):
-    queryset = Flight.objects.all()
+    queryset = FlightRoute.objects.all()
     serializer_class = FlightRouteSerializer
 
 
