@@ -11,6 +11,7 @@ class FlightRouteViewSet(viewsets.ModelViewSet):
     queryset = Flight.objects.all()
     serializer_class = FlightRouteSerializer
 
+
 class JourneyInfoViewSet(viewsets.ModelViewSet):
     queryset = JourneyInfo.objects.all()
     serializer_class = JourneyInfoSerializer
