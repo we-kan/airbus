@@ -25,7 +25,7 @@ SECRET_KEY = 'vgfy+mocm*l0h74mp=arf_6gu5l2=s6^nwf&7)=+*jtmtqt@x%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['207.148.74.210']
 
 
 # Application definition
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'airbus.middleware.cors.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'airbus.urls'
