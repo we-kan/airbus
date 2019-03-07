@@ -6,7 +6,7 @@ from flight.models import Flight
 
 class FlightRoute(models.Model):
     """
-
+    Model for flight route info
     """
     start_location = models.ForeignKey(Airport, related_name="departed_from", on_delete=models.CASCADE)
     end_location = models.ForeignKey(Airport, related_name="arrived_at", on_delete=models.CASCADE)
@@ -17,7 +17,7 @@ class FlightRoute(models.Model):
 
 class JourneyInfo(models.Model):
     """
-
+    model for journeyinfo
     """
     flight_route = models.ForeignKey(FlightRoute, on_delete=models.CASCADE)
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
