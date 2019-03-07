@@ -18,8 +18,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('aircraft', include('aircraft.urls')),
-    path('airport', include('airport.urls')),
-    path('flight', include('flight.urls')),
-    path('flight_route', include('flight_route.urls')),
+    path('aircraft/', include('aircraft.urls')),
+    path('airport/', include('airport.urls')),
+    path('fly/', include('flight.urls')),
+    path('flight_route/', include('flight_route.urls')),
 ]

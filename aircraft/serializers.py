@@ -19,4 +19,4 @@ class AircraftInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AirCraftInfo
-        fields = '__all__'
+        fields = ('aircraft', 'fuel_capacity_right_wing', 'fuel_capacity_left_wing', 'gross_weight', 'harness_length', 'atmospheric_pressure', 'room_temperature')
