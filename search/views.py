@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.db.models import Q
 from rest_framework.response import Response
 from flight.models import Flight
 from flight_route.models import JourneyInfo
@@ -57,24 +58,20 @@ class GetFilterView(APIView):
         """
         flight_details = []
         try:
-            dates = request.GET.get("journey_dates")
             source_destination = request.GET.get("source_destination")
             end_destination = request.GET.get("end_destination")
+            start_date = request.GET.get('start_date')
+            end_date = request.GET.get('end_date')
+            flight_details = JourneyInfo.objects.filter(Q(flight_route__start_location=source_destination)| 
+                                                        Q(flight_route__end_location=end_destination)| 
+                                                        Q(flight_route__start_date__date=start_date)|
+                                                        Q(flight_route__end_date__date=end_date)|
+                                                        Q(flight__msn=request.GET.get('msn'))|
+                                                        Q(flight__flight_number=request.GET.get("flight_number"))|
+                                                        Q(fligh__flight_aircraft_id=request.GET.get('flight_id')))
 
-            if not dates and not source_destination and not end_destination:
-                return Response({"success": False, "message": "Give either dates or destinations"})
-            elif not source_destination and not end_destination:
-                flight_details = JourneyInfo.objects.filter(journey_date__in=dates)
-            elif not dates and not source_destination:
-                flight_details = JourneyInfo.objects.filter(flight_route__end_location__in=end_destination)
-            elif not dates and not end_destination:
-                flight_details = JourneyInfo.objects.filter(flight_route__start_location__in=source_destination)
-            elif not dates:
-                flight_details = JourneyInfo.objects.filter(flight_route__end_location__in=end_destination, flight_route__start_location__in=source_destination)
-            else:
-                flight_details = JourneyInfo.objects.filter(flight_route__end_location__in=end_destination, flight_route__start_location__in=source_destination, journey_date__in=dates)
+                                                        
             serializer = DataSerializer(flight_details, many=True)
             return Response({"success": True, "data": serializer.data})
-
         except Exception as e:
             return Response({"success": False, "message": "Something Went Wrong " + str(e)})
