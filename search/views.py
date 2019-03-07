@@ -64,11 +64,11 @@ class GetFilterView(APIView):
             end_date = request.GET.get('end_date')
             flight_details = JourneyInfo.objects.filter(Q(flight_route__start_location=source_destination)| 
                                                         Q(flight_route__end_location=end_destination)| 
-                                                        Q(flight_route__start_date__date=start_date)|
-                                                        Q(flight_route__end_date__date=end_date)|
+                                                        Q(flight_route__start_time__date=start_date)|
+                                                        Q(flight_route__end_time__date=end_date)|
                                                         Q(flight__msn=request.GET.get('msn'))|
-                                                        Q(flight__flight_number=request.GET.get("flight_number"))|
-                                                        Q(fligh__flight_aircraft_id=request.GET.get('flight_id')))
+                                                        Q(flight_route__flight_number=request.GET.get("flight_number"))|
+                                                        Q(flight__flight_aircraft_id=request.GET.get('flight_id')))
 
                                                         
             serializer = DataSerializer(flight_details, many=True)
