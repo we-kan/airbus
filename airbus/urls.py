@@ -22,4 +22,5 @@ urlpatterns = [
     path('airport/', include('airport.urls')),
     path('fly/', include('flight.urls')),
     path('flight_route/', include('flight_route.urls')),
+    path('news/', include('news.urls'))
 ]
