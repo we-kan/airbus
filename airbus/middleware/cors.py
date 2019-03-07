@@ -1,5 +1,6 @@
+from django.utils.deprecation import MiddlewareMixin
 
-class CorsMiddleware(object):
+class CorsMiddleware(MiddlewareMixin):
     """This middleware updates response header for cross origin resource sharing."""
 
     def process_response(self, request, response):
